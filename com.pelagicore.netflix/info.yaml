@@ -1,0 +1,12 @@
+formatVersion: 1
+formatType: am-application
+---
+id:      'com.pelagicore.netflix'
+icon:    'icon.png'
+code:    'Main.qml'
+runtime: 'qml'
+name:
+  en: 'Netflix'
+  de: 'Netflix'
+
+categories: [ 'other' ]
