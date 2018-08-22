@@ -1,0 +1,13 @@
+formatVersion: 1
+formatType: am-application
+---
+id:      'com.pelagicore.spotify'
+icon:    'icon.png'
+code:    'Main.qml'
+runtime: 'qml'
+name:
+  en: 'Spotify'
+  de: 'Spotify'
+
+categories: [ 'other' ]
+mimeTypes: [ 'x-scheme-handler/x-spotify' ]
