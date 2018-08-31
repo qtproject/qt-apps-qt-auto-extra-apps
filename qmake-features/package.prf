@@ -1,0 +1,32 @@
+# generate code coverage information using gcov/lcov/genhtml
+message("PACKAGE")
+CONFIG(debug,debug|release) {
+    equals(TEMPLATE, "subdirs") {
+        package.target = package
+        package.CONFIG = recursive
+        QMAKE_EXTRA_TARGETS += package
+    } equals(APPMAN_APP, "TRUE") {
+
+        !isEmpty(EXTRA_METADATA): OPTIONS += --extra-metadata $$EXTRA_METADATA
+        !isEmpty(EXTRA_METADATA_FILE): OPTIONS += --extra-metadata-file $$EXTRA_METADATA_FILE
+        !isEmpty(EXTRA_SIGNED_METADATA): OPTIONS += --extra-signed-metadata $$EXTRA_SIGNED_METADATA
+        !isEmpty(EXTRA_SIGNED_METADATA_FILE): OPTIONS += --extra-signed-metadata-file $$EXTRA_SIGNED_METADATA_FILE
+
+        # The actual packaging step
+        package.CONFIG += recursive
+        package.commands += @echo && echo "PACKAGING $$NAME" && echo &&
+        package.commands += $$[QT_HOST_BINS]/appman-packager create-package $${OPTIONS} $${BUILD_DIR}/$${NAME}.pkg $$OUT_PWD/../install
+        build_pass|!debug_and_release:package.depends = install
+
+        QMAKE_EXTRA_TARGETS *= package
+
+        QMAKE_CLEAN += $${BUILD_DIR}/$${NAME}.pkg
+    } else {
+        # Create a dummy target for all other project files
+        package.CONFIG += recursive
+        build_pass|!debug_and_release:package.depends = install
+
+        QMAKE_EXTRA_TARGETS *= package
+    }
+}
+
