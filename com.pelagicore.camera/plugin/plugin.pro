@@ -4,8 +4,6 @@ QT += qml quick
 CONFIG += plugin
 
 TARGET = $$qtLibraryTarget($$TARGET)
-uri = camera
-load(qmlplugin)
 
 # Input
 SOURCES += \
@@ -15,5 +13,11 @@ SOURCES += \
 HEADERS += \
     camera_plugin.h \
     camerastream.h
+
+installPath = /apps/com.pelagicore.camera/imports/camera
+target.path = $$installPath
+qmldir.files = qmldir
+qmldir.path = $$installPath
+INSTALLS += target qmldir
 
 OTHER_FILES = qmldir
