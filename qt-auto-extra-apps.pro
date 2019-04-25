@@ -3,4 +3,5 @@ SUBDIRS = com.pelagicore.camera \
           com.pelagicore.spotify \
           com.pelagicore.netflix \
           com.luxoft.webbrowser \
-          com.luxoft.videoplayer
+          com.luxoft.videoplayer \
+          com.luxoft.greenomics
