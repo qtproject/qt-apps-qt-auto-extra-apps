@@ -2,10 +2,10 @@ TEMPLATE = aux
 
 FILES += info.yaml \
          icon.png \
-         Main.qml
+         Browser.qml
 
 app.files = $$FILES
-app.path = /apps/com.pelagicore.netflix
+app.path = /apps/com.pelagicore.youtube
 INSTALLS += app
 
 AM_MANIFEST = info.yaml
