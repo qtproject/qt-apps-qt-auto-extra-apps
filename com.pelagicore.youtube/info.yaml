@@ -1,12 +1,12 @@
 formatVersion: 1
 formatType: am-application
 ---
-id:      'com.pelagicore.netflix'
+id:      'com.pelagicore.youtube'
 icon:    'icon.png'
-code:    'Main.qml'
+code:    'Browser.qml'
 runtime: 'qml'
 name:
-  en: 'Netflix'
-  de: 'Netflix'
+  en: 'Youtube'
+  de: 'Youtube'
 
 categories: [ 'other' ]
