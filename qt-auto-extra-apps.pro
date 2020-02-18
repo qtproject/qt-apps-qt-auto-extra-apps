@@ -5,3 +5,7 @@ SUBDIRS = com.pelagicore.camera \
           com.luxoft.videoplayer \
           com.luxoft.greenomics \
           com.pelagicore.samegame
+
+# Top-level package target
+QMAKE_EXTRA_TARGETS += package
+package.CONFIG = recursive
