@@ -3,7 +3,7 @@
 ** Copyright (C) 2020 Luxoft Sweden AB
 ** Contact: https://www.qt.io/licensing/
 **
-** This file is part of the Neptune 3 IVI UI.
+** This file is part of the Neptune 3 UI.
 **
 ** $QT_BEGIN_LICENSE:GPL-QTAS$
 ** Commercial License Usage
@@ -53,6 +53,11 @@ Rectangle {
     }
 
     signal fileOpenRequested(url fileURL)
+    signal playRequested()
+    signal pauseRequested()
+    signal stopRequested()
+    signal muteRequested(bool muted)
+    signal seekRequested(int offset)
 
     Timer {
         id: hideTimer
@@ -127,6 +132,7 @@ Rectangle {
             onMoved: {
                 hideTimer.restart();
                 player.seek(value);
+                root.seekRequested(value);
             }
         }
 
@@ -142,7 +148,13 @@ Rectangle {
             enabled: player.hasVideo
             onClicked: {
                 hideTimer.restart();
-                player.playbackState == MediaPlayer.PlayingState ? player.pause() : player.play();
+                if (player.playbackState == MediaPlayer.PlayingState) {
+                    player.pause();
+                    root.pauseRequested();
+                } else {
+                    player.play();
+                    root.playRequested();
+                }
             }
         }
         ToolButton {
@@ -154,6 +166,7 @@ Rectangle {
             onClicked: {
                 hideTimer.restart();
                 player.stop();
+                root.stopRequested();
             }
         }
         ToolButton {
@@ -167,6 +180,7 @@ Rectangle {
             onToggled: {
                 hideTimer.restart();
                 player.muted = !player.muted;
+                root.muteRequested(player.muted);
             }
         }
     }

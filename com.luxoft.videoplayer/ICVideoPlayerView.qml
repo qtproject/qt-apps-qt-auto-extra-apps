@@ -1,6 +1,7 @@
 /****************************************************************************
 **
 ** Copyright (C) 2020 Luxoft Sweden AB
+** Copyright (C) 2018 Pelagicore AG
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of the Neptune 3 UI.
@@ -30,10 +31,6 @@
 ****************************************************************************/
 
 import QtQuick 2.12
-import QtQuick.Layouts 1.3
-
-import shared.animations 1.0
-import shared.controls 1.0
 import shared.utils 1.0
 import shared.Style 1.0
 import shared.Sizes 1.0
@@ -41,37 +38,23 @@ import shared.Sizes 1.0
 Item {
     id: root
 
-    property bool bottomWidgetHide: false
     property alias sourceUrl: videoplayer.sourceUrl
+    property alias player: videoplayer.player
 
-    signal fileOpenRequested(url fileURL)
-    signal playRequested()
-    signal pauseRequested()
-    signal stopRequested()
-    signal muteRequested(bool muted)
-    signal seekRequested(int offset)
-
-    // Top content background
     Image {
-        id: topContentBg
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: parent.top
-        height: Sizes.dp(436)
-        source: Style.image("app-fullscreen-top-bg")
-        visible: root.state === "Maximized"
+        anchors.fill: parent
+        source: Style.image("instrument-cluster-bg")
+        fillMode: Image.Stretch
     }
 
-    ColumnLayout {
-        anchors.fill: parent
-        VideoPlayerPanel {
-            id: videoplayer
-            anchors.fill: parent
-            onPlayRequested: root.playRequested()
-            onPauseRequested: root.pauseRequested()
-            onStopRequested: root.stopRequested()
-            onSeekRequested: root.seekRequested(offset)
-            onMuteRequested: root.muteRequested(muted)
-        }
+    VideoPlayerPanel {
+        id: videoplayer
+        width: Sizes.dp(800)
+        height: Sizes.dp(600)
+        anchors.centerIn: parent
+        anchors.verticalCenterOffset: Sizes.dp(60)
+        player.muted: true
+
+        icWindow: true
     }
 }

@@ -3,7 +3,7 @@
 ** Copyright (C) 2020 Luxoft Sweden AB
 ** Contact: https://www.qt.io/licensing/
 **
-** This file is part of the Neptune 3 IVI UI.
+** This file is part of the Neptune 3 UI.
 **
 ** $QT_BEGIN_LICENSE:GPL-QTAS$
 ** Commercial License Usage
@@ -33,6 +33,8 @@ import QtQuick 2.12
 import application.windows 1.0
 import shared.utils 1.0
 
+import shared.com.pelagicore.settings 1.0
+
 import "."
 
 ApplicationCCWindow {
@@ -51,6 +53,7 @@ ApplicationCCWindow {
     }
 
     VideoPlayerView {
+        id: videoplayer
         x: root.exposedRect.x
         y: root.exposedRect.y
         width: root.exposedRect.width
@@ -58,5 +61,33 @@ ApplicationCCWindow {
 
         state: root.neptuneState
         bottomWidgetHide: root.exposedRect.height === root.targetHeight
+    }
+
+    InstrumentCluster {
+        id: clusterSettings
+    }
+
+    readonly property Loader applicationICWindowLoader: Loader {
+        asynchronous: true
+        active: clusterSettings.available
+                || Qt.platform.os !== "linux" // FIXME and then remove; remote settings doesn't really work outside of Linux
+
+        sourceComponent: Component {
+            ApplicationICWindow {
+                ICVideoPlayerView {
+                    id: icVideoPlayer
+                    anchors.fill: parent
+                    sourceUrl: videoplayer.sourceUrl
+
+                    Connections {
+                        target: videoplayer
+                        onPlayRequested: icVideoPlayer.player.play()
+                        onPauseRequested: icVideoPlayer.player.pause()
+                        onStopRequested: icVideoPlayer.player.stop()
+                        onSeekRequested: icVideoPlayer.player.seek(offset)
+                    }
+                }
+            }
+        }
     }
 }

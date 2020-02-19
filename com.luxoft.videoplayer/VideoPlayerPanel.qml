@@ -3,7 +3,7 @@
 ** Copyright (C) 2020 Luxoft Sweden AB
 ** Contact: https://www.qt.io/licensing/
 **
-** This file is part of the Neptune 3 IVI UI.
+** This file is part of the Neptune 3 UI.
 **
 ** $QT_BEGIN_LICENSE:GPL-QTAS$
 ** Commercial License Usage
@@ -36,9 +36,21 @@ import QtMultimedia 5.12
 import "utils.js" as Utils
 
 Rectangle {
+    id: root
     implicitWidth: 800
     implicitHeight: 600
-    color: "black"
+    color: icWindow ? "transparent" : "black"
+
+    property bool icWindow
+    property alias sourceUrl: videoplayer.source
+    property alias player: videoplayer
+
+    signal fileOpenRequested(url fileURL)
+    signal playRequested()
+    signal pauseRequested()
+    signal stopRequested()
+    signal muteRequested(bool muted)
+    signal seekRequested(int offset)
 
     Video {
         id: videoplayer
@@ -63,21 +75,23 @@ Rectangle {
             console.debug("Supported audio roles:", supportedAudioRoles())
         }
 
-        focus: true
+        focus: !root.icWindow
         Keys.onLeftPressed: seek(position - 5000)
         Keys.onRightPressed: seek(position + 5000)
         Keys.onUpPressed: videoplayer.volume += .1
         Keys.onDownPressed: videoplayer.volume -= .1
-        Keys.enabled: videoplayer.seekable
+        Keys.enabled: videoplayer.seekable && !root.icWindow
 
         MouseArea {
             anchors.fill: parent
+            enabled: !root.icWindow
+            visible: enabled
             onClicked: controls.shouldShow = !controls.shouldShow
         }
 
         ToolButton {
             anchors.centerIn: parent
-            visible: !videoplayer.hasVideo && !controls.shouldShow
+            visible: !videoplayer.hasVideo && !controls.shouldShow && !root.icWindow
             text: qsTr("Open video...")
             onClicked: {
                 controls.shouldShow = !controls.shouldShow;
@@ -90,10 +104,18 @@ Rectangle {
             width: parent.width
             height: parent.height
             x: parent.x
-            y: shouldShow ? 0 : parent.height
+            y: shouldShow && !root.icWindow ? 0 : parent.height
             player: videoplayer
-            Behavior on y { NumberAnimation {}}
-            onFileOpenRequested: videoplayer.source = fileURL
+            Behavior on y { NumberAnimation {} }
+            onFileOpenRequested: {
+                videoplayer.source = "";
+                videoplayer.source = fileURL;
+            }
+            onPlayRequested: root.playRequested()
+            onPauseRequested: root.pauseRequested()
+            onStopRequested: root.stopRequested()
+            onSeekRequested: root.seekRequested(offset)
+            onMuteRequested: root.muteRequested(muted)
         }
     }
 }

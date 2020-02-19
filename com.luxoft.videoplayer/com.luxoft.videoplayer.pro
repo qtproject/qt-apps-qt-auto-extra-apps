@@ -7,6 +7,7 @@ FILES += info.yaml \
          VideoPlayerPanel.qml \
          ControlsOverlay.qml \
          OpenFilesPanel.qml \
+         ICVideoPlayerView.qml \
          utils.js
 
 app.files = $$FILES
