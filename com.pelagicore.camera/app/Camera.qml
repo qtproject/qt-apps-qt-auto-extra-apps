@@ -1,5 +1,6 @@
 /****************************************************************************
 **
+** Copyright (C) 2019-2020 Luxoft Sweden AB
 ** Copyright (C) 2018 Pelagicore AG
 ** Contact: https://www.qt.io/licensing/
 **
@@ -54,17 +55,20 @@ import QtQuick 2.8
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.2
 import QtGraphicalEffects 1.0
-import utils 1.0
-import controls 1.0
 
-import com.pelagicore.styles.neptune 3.0
+import shared.utils 1.0
+import shared.controls 1.0
+import shared.Style 1.0
+import shared.Sizes 1.0
+import application.windows 1.0
+
 import camera 0.1
 
-PrimaryWindow {
+ApplicationCCWindow {
     id: root
     readonly property var angles: [qsTr("Front"), qsTr("Rear"), qsTr("Left"), qsTr("Right")]
     property bool play: !videofeed.lastError
-    property real buttonWidth: NeptuneStyle.dp(100)
+    property real buttonWidth: Sizes.dp(100)
 
     function prevCamera() {
         videofeed.angle = (videofeed.angle+3) % 4;
@@ -91,14 +95,14 @@ PrimaryWindow {
         CameraStream {
             id: videofeed
             anchors.horizontalCenter: parent.horizontalCenter
-            width: NeptuneStyle.dp(1280)
-            height: NeptuneStyle.dp(1080)
+            width: Sizes.dp(1280)
+            height: Sizes.dp(1080)
 
             Row {
                 id: controls
                 anchors.top: parent.top
                 width: 3*root.buttonWidth
-                height: NeptuneStyle.dp(100)
+                height: Sizes.dp(100)
                 anchors.horizontalCenter: parent.horizontalCenter
                 ToolButton {
                     width: root.buttonWidth
@@ -121,14 +125,14 @@ PrimaryWindow {
                     background: Image {
                         id: playButtonBackground
                         anchors.centerIn: parent
-                        width: NeptuneStyle.dp(sourceSize.width)
-                        height: NeptuneStyle.dp(sourceSize.height)
-                        source: Style.symbol("ic_button-bg")
+                        width: Sizes.dp(sourceSize.width)
+                        height: Sizes.dp(sourceSize.height)
+                        source: Style.image("ic_button-bg")
                         fillMode: Image.PreserveAspectFit
                         layer.enabled: true
                         layer.effect: ColorOverlay {
                             source: playButtonBackground
-                            color: NeptuneStyle.accentColor
+                            color: Style.accentColor
                         }
                     }
                 }
@@ -152,7 +156,7 @@ PrimaryWindow {
             Label {
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.bottom: parent.bottom
-                anchors.bottomMargin: NeptuneStyle.dp(10)
+                anchors.bottomMargin: Sizes.dp(10)
 
                 id: camlabel
                 text: root.angles[videofeed.angle]
