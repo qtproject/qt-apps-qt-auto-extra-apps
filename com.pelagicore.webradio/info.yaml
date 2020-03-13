@@ -1,0 +1,13 @@
+formatVersion: 1
+formatType: am-application
+---
+id:      'com.pelagicore.webradio'
+icon:    'icon.png'
+code:    'Main.qml'
+runtime: 'qml'
+runtimeParameters: { importPaths: ['.'] }
+name:
+  en: 'WebRadio'
+  de: 'WebRadio'
+
+categories: [ 'media' ]
