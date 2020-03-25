@@ -76,16 +76,40 @@ Item {
                 var pos = currentItem.mapToItem(root.rootItem
                                                 , currentItem.width/2, currentItem.height/2);
 
+                let posX = pos.x / root.Sizes.scale;
+                let posY = pos.y / root.Sizes.scale;
+
+                // caclulate popup height based on musicSources list items
+                // + 200 for header & margins
+                musicSourcesPopup.height = Qt.binding(() => {
+                    return musicSourcesPopup.model
+                        ? root.Sizes.dp(200 + (musicSourcesPopup.model.count * 96))
+                        : root.Sizes.dp(296);
+                });
+                musicSourcesPopup.width = Qt.binding(() => root.Sizes.dp(910))
+
                 //set model each time to ensure data accuracy
                 musicSourcesPopup.model = root.store.musicSourcesModel
-                musicSourcesPopup.originItemX = pos.x;
-                musicSourcesPopup.originItemY = pos.y;
+                musicSourcesPopup.originItemX = Qt.binding(() => root.Sizes.dp(posX));
+                musicSourcesPopup.originItemY = Qt.binding(() => root.Sizes.dp(posY));
+                musicSourcesPopup.popupY = Qt.binding(() => {
+                    return root.Sizes.dp(Config.centerConsoleHeight / 4);
+                });
                 musicSourcesPopup.visible = true;
             } else if (currentText === "ABOUT...") {
                 pos = currentItem.mapToItem(root.rootItem
                                                 , currentItem.width/2, currentItem.height/2);
-                aboutPopup.originItemX = pos.x;
-                aboutPopup.originItemY = pos.y;
+
+                let posX = pos.x / root.Sizes.scale;
+                let posY = pos.y / root.Sizes.scale;
+
+                aboutPopup.width = Qt.binding(() => root.Sizes.dp(910))
+                aboutPopup.height = Qt.binding(() => root.Sizes.dp(450))
+                aboutPopup.originItemX = Qt.binding(() => root.Sizes.dp(posX));
+                aboutPopup.originItemY = Qt.binding(() => root.Sizes.dp(posY));
+                aboutPopup.popupY = Qt.binding(() => {
+                    return root.Sizes.dp(Config.centerConsoleHeight / 4);
+                });
                 aboutPopup.visible = true;
             }
 
@@ -95,11 +119,6 @@ Item {
 
     MusicSourcesPopup {
         id: musicSourcesPopup
-        width: root.Sizes.dp(910)
-        // caclulate popup height based on musicSources list items
-        // + 200 for header & margins
-        height: model ? root.Sizes.dp(200 + (model.count * 96)) : root.Sizes.dp(296)
-        popupY: root.Sizes.dp(Config.centerConsoleHeight / 4)
         onSwitchSourceClicked: {
             store.switchSource(source)
         }
@@ -107,11 +126,6 @@ Item {
 
     AboutPopup {
         id: aboutPopup
-        width: root.Sizes.dp(910)
-        // caclulate popup height based on musicSources list items
-        // + 200 for header & margins
-        height: root.Sizes.dp(450)
-        popupY: root.Sizes.dp(Config.centerConsoleHeight / 4)
     }
 
     GridView {
