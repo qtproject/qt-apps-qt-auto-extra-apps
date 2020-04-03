@@ -1,0 +1,17 @@
+formatVersion: 1
+formatType: am-application
+---
+id:      'com.pelagicore.samegame'
+icon:    'icon.png'
+code:    'Main.qml'
+runtime: 'qml'
+name:
+  en: 'Same Game'
+  de: 'Spiel'
+  cs: 'Hra'
+  ru: 'Игра'
+  zh: '游戏'
+  ja: 'ゲーム'
+  ko: '경기'
+
+categories: [ 'game' ]
