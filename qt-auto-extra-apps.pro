@@ -6,6 +6,7 @@ SUBDIRS = com.pelagicore.camera \
           com.luxoft.greenomics \
           com.pelagicore.samegame \
           com.pelagicore.webradio \
+          com.pelagicore.parking \
 
 # Top-level package target
 QMAKE_EXTRA_TARGETS += package

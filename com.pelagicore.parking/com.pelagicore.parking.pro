@@ -2,7 +2,8 @@ TEMPLATE = aux
 
 FILES += info.yaml \
          icon.png \
-         Main.qml
+         Main.qml \
+         assets \
 
 app.files = $$FILES
 app.path = /apps/com.pelagicore.parking
