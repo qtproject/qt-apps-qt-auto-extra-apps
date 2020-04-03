@@ -33,12 +33,20 @@ import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtMultimedia 5.12
 
+import shared.Sizes 1.0
+import shared.com.pelagicore.systeminfo 1.0
+
 import "utils.js" as Utils
 
 Rectangle {
+    id: root
+
     implicitWidth: 800
     implicitHeight: 600
     color: "black"
+
+    readonly property SystemInfo systemInfo: SystemInfo {}
+    readonly property bool showWarning: systemInfo.allowOpenGLContent
 
     Video {
         id: videoplayer
@@ -95,5 +103,14 @@ Rectangle {
             Behavior on y { NumberAnimation {}}
             onFileOpenRequested: videoplayer.source = fileURL
         }
+    }
+
+    Label {
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.verticalCenterOffset: -Sizes.dp(50)
+        text: qsTr("Video is not shown in this runtime environment")
+        font.pixelSize: Sizes.fontSizeL
+        visible: !root.showWarning
     }
 }
