@@ -1,13 +1,16 @@
 formatVersion: 1
-formatType: am-application
+formatType: am-package
 ---
 id:      'com.pelagicore.camera'
 icon:    'icon.png'
-code:    'Camera.qml'
-runtime: 'qml'
-runtimeParameters:
-    importPaths: [ 'imports' ]
 name:
   en: 'Camera'
+
+applications:
+- id:      'com.pelagicore.camera'
+  code:    'Camera.qml'
+  runtime: 'qml'
+  runtimeParameters:
+    importPaths: [ 'imports' ]
 
 categories: [ 'app', 'widget' ]

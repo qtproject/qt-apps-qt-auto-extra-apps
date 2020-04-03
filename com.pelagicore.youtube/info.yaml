@@ -1,12 +1,15 @@
 formatVersion: 1
-formatType: am-application
+formatType: am-package
 ---
 id:      'com.pelagicore.youtube'
 icon:    'icon.png'
-code:    'Browser.qml'
-runtime: 'qml'
 name:
   en: 'Youtube'
   de: 'Youtube'
+
+applications:
+  - id:      'com.pelagicore.youtube'
+    code:    'Browser.qml'
+    runtime: 'qml'
 
 categories: [ 'other' ]

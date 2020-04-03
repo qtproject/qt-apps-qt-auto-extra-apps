@@ -1,12 +1,14 @@
 formatVersion: 1
-formatType: am-application
+formatType: am-package
 ---
 id:      'com.luxoft.videoplayer'
 icon:    'icon.png'
-code:    'Main.qml'
-runtime: 'qml'
 name:
   en: 'Video Player'
 
+applications:
+  - id:      'com.luxoft.videoplayer'
+    code:    'Main.qml'
+    runtime: 'qml'
+
 categories: [ 'other', 'widget' ]
-mimeTypes: [ 'x-scheme-handler/x-videoplayer' ]

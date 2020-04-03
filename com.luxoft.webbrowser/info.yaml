@@ -1,11 +1,14 @@
 formatVersion: 1
-formatType: am-application
+formatType: am-package
 ---
 id:      'com.luxoft.webbrowser'
 icon:    'icon.png'
-code:    'Main.qml'
-runtime: 'qml'
 name:
   en: 'Web Browser'
+
+applications:
+  - id:      'com.luxoft.webbrowser'
+    code:    'Main.qml'
+    runtime: 'qml'
 
 categories: [ 'productivity', 'widget' ]

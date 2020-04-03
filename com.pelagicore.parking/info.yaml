@@ -1,13 +1,16 @@
 formatVersion: 1
-formatType: am-application
+formatType: am-package
 ---
 id:      'com.pelagicore.parking'
 icon:    'icon.png'
-code:    'Main.qml'
-runtime: 'qml'
 name:
   en: 'Parking'
   de: 'Parking'
   cs: 'Parking'
+
+applications:
+- id:      'com.pelagicore.parking'
+  code:    'Main.qml'
+  runtime: 'qml'
 
 categories: [ 'other' ]
