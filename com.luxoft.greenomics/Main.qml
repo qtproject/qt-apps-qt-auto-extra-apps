@@ -34,7 +34,7 @@ import application.windows 1.0
 import shared.utils 1.0
 import shared.Sizes 1.0
 
-import shared.com.pelagicore.drivedata 1.0
+import shared.com.pelagicore.settings 1.0
 
 import "view" 1.0
 
