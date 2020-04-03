@@ -1,0 +1,5 @@
+com.luxoft.greenomics/assets/cluster_globe.png filter=lfs diff=lfs merge=lfs -text
+com.luxoft.greenomics/assets/cluster_map.png filter=lfs diff=lfs merge=lfs -text
+com.luxoft.greenomics/assets/fridge_asset.png filter=lfs diff=lfs merge=lfs -text
+com.luxoft.greenomics/assets/recipe_asset.png filter=lfs diff=lfs merge=lfs -text
+com.luxoft.greenomics/assets/recipe_selected_asset.png filter=lfs diff=lfs merge=lfs -text
